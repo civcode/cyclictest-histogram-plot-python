@@ -12,20 +12,8 @@ $ sed -i '1s/^/time,core1,core2,core3,core4\n /' histogram.csv
 ## Plot the result
 
 ```
-$ python3 plot-histogram.py <histogram.csv> --title "Plot title"
-```
-
-```
-usage: plot-histogram.py [-h] [--title TITLE] csv_file
-
-Plot histogram from a CSV file.
-
-positional arguments:
-  csv_file       Path to the CSV file
-
-options:
-  -h, --help     show this help message and exit
-  --title TITLE  Title of the plot
+$ python3 plot-histogram.py -h
+$ python3 plot-histogram.py <histogram.csv> --title "Plot title" --save --filename "filename.png"
 ```
 
 ## Images
