@@ -7,7 +7,11 @@ import argparse
 
 def plot_core_values(csv_file, title, save, filename):
     # Reading the CSV file into a DataFrame
-    data = pd.read_csv(csv_file)
+    # data = pd.read_csv(csv_file)
+    data = pd.read_csv(csv_file, delim_whitespace=True, comment='#')
+
+    # Adding a header row
+    data.columns = ['time', 'core1', 'core2', 'core3', 'core4']
 
     # Convert the core columns to numeric
     data[['core1', 'core2', 'core3', 'core4']] = data[['core1', 'core2', 'core3', 'core4']].apply(pd.to_numeric)
