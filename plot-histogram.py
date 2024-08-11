@@ -1,9 +1,11 @@
+#!/usr/bin/env python3
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import sys
 import argparse
 
-def plot_core_values(csv_file, title):
+def plot_core_values(csv_file, title, save, filename):
     # Reading the CSV file into a DataFrame
     data = pd.read_csv(csv_file)
 
@@ -34,13 +36,17 @@ def plot_core_values(csv_file, title):
     plt.grid(True)
 
     plt.tight_layout()
+    if save:
+        plt.savefig(filename)
     plt.show()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Plot histogram from a CSV file.')
     parser.add_argument('csv_file', type=str, help='Path to the CSV file')
     parser.add_argument('--title', type=str, default='', help='Title of the plot')
+    parser.add_argument('--save', action='store_true', help='Save the plot to a file')
+    parser.add_argument('--filename', type=str, default='plot.png', help='Name of the output file')
 
     args = parser.parse_args()
-    plot_core_values(args.csv_file, args.title)
+    plot_core_values(args.csv_file, args.title, args.save, args.filename)
 
