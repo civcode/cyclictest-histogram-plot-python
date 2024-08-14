@@ -5,8 +5,6 @@
 ```
 # Example for machine with 4 cores:
 $ sudo cyclictest -l5000000 -m -S -p90 -i200 -h400 -q > output.txt
-$ grep -v -e "^#" -e "^$" output.txt | tr " " "," | tr "\t" "," >histogram.csv
-$ sed -i '1s/^/time,core1,core2,core3,core4\n /' histogram.csv
 ```
 
 ## Plot the result
