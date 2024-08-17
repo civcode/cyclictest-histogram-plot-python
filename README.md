@@ -4,7 +4,7 @@
 - pandas
 - matplotlib
 
-## Run cyclictest and convert output to csv
+## Run cyclictest and write output
 
 ```
 # Example for machine with 4 cores:
@@ -15,7 +15,7 @@ $ sudo cyclictest -l5000000 -m -S -p90 -i200 -h400 -q > output.txt
 
 ```
 $ python3 plot-histogram.py -h
-$ python3 plot-histogram.py <histogram.csv> --title "Plot title" --save --filename "filename.png"
+$ python3 plot-histogram.py <output.txt> --save
 ```
 
 ## Images
