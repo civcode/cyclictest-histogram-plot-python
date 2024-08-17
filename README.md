@@ -1,5 +1,9 @@
 # Plot histogram of the cyclictest output
 
+## Dependencies
+- pandas
+- matplotlib
+
 ## Run cyclictest and convert output to csv
 
 ```
