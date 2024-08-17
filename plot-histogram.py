@@ -63,8 +63,8 @@ def plot_core_values(csv_file, title, save, filename):
 
     plt.plot(time, core1, label='cpu0')
     plt.plot(time, core2, label='cpu1')
-    plt.plot(time, core3, label='cpu3')
-    plt.plot(time, core4, label='cpu4')
+    plt.plot(time, core3, label='cpu2')
+    plt.plot(time, core4, label='cpu3')
 
     plt.yscale('log')
     plt.xlabel('Latency in µs')
