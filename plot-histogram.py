@@ -93,10 +93,10 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Set the title to the CSV file name if no title is provided
-    args.title = args.title if args.title else args.csv_file.split('/')[-1].split('.')[0]
+    args.title = args.title if args.title else args.csv_file.split('/')[-1].split('.txt')[0]
 
     # Set the filename to the CSV file name if no filename is provided
-    args.filename = args.filename if args.filename else args.csv_file.split('.')[0] + '.png'
+    args.filename = args.filename if args.filename else args.csv_file.split('.txt')[0] + '.png'
 
     plot_core_values(args.csv_file, args.title, args.save, args.filename)
 
