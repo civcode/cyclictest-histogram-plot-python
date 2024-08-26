@@ -96,12 +96,30 @@ if __name__ == "__main__":
         sys.exit(1)
 
     args = parser.parse_args()
+    
+    # Check if the CSV file exists
+    try:
+        with open(args.csv_file) as file:
+            pass
+    except FileNotFoundError:
+        print(f"\nError: {args.csv_file} does not exist.")
+        sys.exit(1)
 
     # Set the title to the CSV file name if no title is provided
     args.title = args.title if args.title else args.csv_file.split('/')[-1].split('.txt')[0]
 
     # Set the filename to the CSV file name if no filename is provided
     args.filename = args.filename if args.filename else args.csv_file.split('.txt')[0] + '.png'
+
+    # Determine the number of CPU columns
+    num_cpus = len(pd.read_csv(args.csv_file, delim_whitespace=True, comment='#').columns) - 1
+
+    # Check if an element in the CPU list exceeds the number of available CPUs
+    if args.cpu_list:
+        for cpu in args.cpu_list.split(','):
+            if int(cpu) >= num_cpus:
+                print(f"\nError: CPU {cpu} exceeds the number of available CPUs.")
+                sys.exit(1)
 
     # Parse the CPU list
     cpu_list = [f'cpu{int(cpu)}' for cpu in args.cpu_list.split(',')] if args.cpu_list else [f'cpu{i}' for i in range(num_cpus)]
