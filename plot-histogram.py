@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import argparse
 import sys
 
-def plot_core_values(csv_file, title, save, filename, cpu_list):
+def plot_core_values(csv_file, title, save, filename, cpu_list, max_latency):
     # Reading the CSV file into a DataFrame
     data = pd.read_csv(csv_file, delim_whitespace=True, comment='#')
 
@@ -66,13 +66,16 @@ def plot_core_values(csv_file, title, save, filename, cpu_list):
         if cpu in cpus:
             plt.plot(time, cpus[cpu], label=cpu)
 
-
     plt.yscale('log')
     plt.xlabel('Latency in µs')
     plt.ylabel('Number of latency samples')
     plt.title(title)
     plt.legend()
     plt.grid(True)
+
+    # Set x-axis limit if max_latency is provided
+    if max_latency:
+        plt.xlim(left=-1, right=max_latency)
 
     plt.tight_layout()
     if save:
@@ -86,6 +89,7 @@ if __name__ == "__main__":
     parser.add_argument('--save', action='store_true', help='Save the plot to a file')
     parser.add_argument('--filename', type=str, default='', help='Name of the output file. If not set, will be the same as the CSV file')
     parser.add_argument('--cpu-list', type=str, default='', help='Comma-separated list of CPU cores to plot')
+    parser.add_argument('--max-latency', type=float, default=None, help='Maximum latency value for the x-axis')
 
     if len(sys.argv) == 1:
         parser.print_help(sys.stderr)
@@ -102,5 +106,5 @@ if __name__ == "__main__":
     # Parse the CPU list
     cpu_list = [f'cpu{int(cpu)}' for cpu in args.cpu_list.split(',')] if args.cpu_list else [f'cpu{i}' for i in range(num_cpus)]
 
-    plot_core_values(args.csv_file, args.title, args.save, args.filename, cpu_list)
+    plot_core_values(args.csv_file, args.title, args.save, args.filename, cpu_list, args.max_latency)
 
